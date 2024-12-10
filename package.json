@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7",
+    "mc-ping-updated": "^0.1.1",
+    "minecraft-ping": "^1.0.0",
+    "minecraft-server-util": "^5.4.4",
+    "node-ssh": "^13.2.0",
+    "ssh2": "^1.16.0",
+    "wol": "^1.0.7"
+  }
+}
