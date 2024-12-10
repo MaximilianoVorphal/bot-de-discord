@@ -44,7 +44,7 @@ let statusMessage;
 function createStatusEmbed(pcStatus, mcStatus) {
     const embed = new EmbedBuilder()
         .setTitle("🎮 Control del servidor y Status servidor de Minecraft")
-        .setDescription("Usa los botones para manejar el Servidor o consultar el estado del servidor de Minecraft.")
+        .setDescription("La idea es apagar el servidor cuando no se esta en uso y asi ahorrando energia para no matar al arbolito. Usa los botones para manejar el servidor o consultar el estado del servidor de Minecraft.")
         .addFields(
             { name: "🖥️ Estado del Servidor", value: pcStatus, inline: true },
             { name: "🌐 Estado del Servidor de Minecraft", value: mcStatus, inline: true }
@@ -231,6 +231,19 @@ client.once("ready", async () => {
     } catch (error) {
         console.error("Error al iniciar el bot:", error);
     }
+
+    setInterval(async () => {
+        try {
+            const mcStatus = await getMinecraftStatus();
+            const pcStatus = await getPCStatus(); // Obtener también el estado del PC
+            const embed = createStatusEmbed(pcStatus, mcStatus);
+            await statusMessage.edit({ embeds: [embed] });
+            console.log("✅ Estado del servidor de Minecraft actualizado.");
+        } catch (error) {
+            console.error("❌ Error al actualizar el estado del servidor de Minecraft:", error);
+        }
+    }, 5 * 60 * 1000); // 5 minutos en milisegundos
+
 });
 
 /**
